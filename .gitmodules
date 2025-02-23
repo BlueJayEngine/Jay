@@ -1,0 +1,12 @@
+[submodule "engine/Jay_Core"]
+	path = engine/Jay_Core
+	url = git@github.com:BlueJayEngine/Jay_Core.git
+[submodule "engine/Jay_ECS"]
+	path = engine/Jay_ECS
+	url = git@github.com:BlueJayEngine/Jay_ECS.git
+[submodule "engine/Jay_Math"]
+	path = engine/Jay_Math
+	url = git@github.com:BlueJayEngine/Jay_Math.git
+[submodule "engine/Jay_Logger"]
+	path = engine/Jay_Logger
+	url = git@github.com:BlueJayEngine/Jay_Logger.git
