@@ -1,0 +1,35 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "lldb-mi",
+      "request": "launch",
+      "name": "Launch Program",
+      "target": "${workspaceFolder}/bin/${workspaceFolderBasename}.exe",
+      "cwd": "${workspaceRoot}",
+      "valuesFormatting": "parseText"
+    },
+    {
+      "name": "WinDebug",
+      // "type": "windbg",
+      "type": "windbg",
+      "request": "launch",
+      "target": "${workspaceFolder}/bin/${workspaceFolderBasename}.exe",
+      "verbosity": "info",
+      "workingDir": "${workspaceRoot}",
+      "sources": ["${workspaceRoot}"],
+      "preLaunchTask": "build",
+      "windbgpath": "C:/Program Files (x86)/Windows Kits/10/Debuggers/x64/dbgeng.dll",
+      "internalConsoleOptions": "openOnSessionStart",
+      // "na": "D:/JaiLatest/editor_support/msvc/jai.natvis",
+    },
+    {
+      "type": "by-gdb",
+      "request": "launch",
+      "name": "Launch(gdb)",
+      "program": "${workspaceFolder}/bin/${workspaceFolderBasename}.exe",
+      "cwd": "${workspaceRoot}",
+      "preLaunchTask": "build",
+    },
+  ]
+}

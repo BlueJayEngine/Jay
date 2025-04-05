@@ -10,3 +10,12 @@
 [submodule "engine/Jay_Logger"]
 	path = engine/Jay_Logger
 	url = git@github.com:BlueJayEngine/Jay_Logger.git
+[submodule "engine/Slang"]
+	path = engine/Slang
+	url = git@github.com:rytc/slang-jai.git
+[submodule "engine/jai-vulkan"]
+	path = engine/jai-vulkan
+	url = https://gitlab.com/Stowy/jai-vulkan.git
+[submodule "engine/jai-vma"]
+	path = engine/jai-vma
+	url = https://gitlab.com/Stowy/jai-vma.git
