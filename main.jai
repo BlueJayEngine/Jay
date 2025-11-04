@@ -1,32 +1,48 @@
 #import "Basic"()(MEMORY_DEBUGGER = true);
 #import "Jay_Core";
-#import "Jay_ECS";
 #import "Jay_Render";
-
-main :: () {
-    engine: Engine(Packages(
-        Jay_ECS(
-            System(test, xx Game_Stage_Temp.TICK),
-            // System(test2)
-        ),
-        Jay_Render,
-        Test,
-        Test2
-    ));
-
-    run(*engine);
-}
+#import "Jay_Logger";
 
 Test :: struct {
-    after: Lifecycle.Simulation; 
+    foo: string;
+    bar: Test_Child; 
+    fizz: float;
+    buzz: int;
+
+    test_func :: () {
+        return;
+    }
 }
 
-Test2 :: struct {
-    before: Lifecycle.Render;
+Test_Child :: struct {
+    big: float64;
+    smol: s8;
 }
 
-test :: (delta_time: Delta_Time) {
-    log("% - %", delta_time, 1/delta_time);
+main :: () {
+    test_example: Test;
+
+
+    test_example = .{
+        foo = "",
+        bar = .{
+            
+        },
+    };
+
+    test_example.bar = .{
+                
+    };
+    
+    context.logger = jay_logger; 
+
+    engine: Engine(
+        Packages(
+            Jay_Render
+        )
+    );
+
+    run(*engine);
+
+    report_memory_leaks();
 }
-
-
