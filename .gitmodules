@@ -25,3 +25,6 @@
 [submodule "engine/Jay_Render"]
 	path = engine/Jay_Render
 	url = https://github.com/BlueJayEngine/Jay_Render.git
+[submodule "engine/vulkan-jai-bindings"]
+	path = engine/vulkan-jai-bindings
+	url = https://github.com/vkaronen/vulkan-jai-bindings
