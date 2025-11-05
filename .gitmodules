@@ -16,9 +16,6 @@
 [submodule "engine/jai-vma"]
 	path = engine/jai-vma
 	url = https://gitlab.com/Stowy/jai-vma.git
-[submodule "engine/sdl3"]
-	path = engine/jai-sdl3
-	url = git@github.com:myriadbytes/sdl3_jai.git
 [submodule "engine/vulkan-jai-bingins"]
 	path = engine/vulkan-jai-bingins
 	url = https://github.com/drshapeless/vulkan-jai-binding.git
@@ -28,3 +25,6 @@
 [submodule "engine/vulkan-jai-bindings"]
 	path = engine/vulkan-jai-bindings
 	url = https://github.com/vkaronen/vulkan-jai-bindings
+[submodule "engine/jai-sdl3"]
+	path = engine/jai-sdl3
+	url = https://github.com/overlord-systems/jai-sdl3.git
