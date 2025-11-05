@@ -13,9 +13,6 @@
 [submodule "engine/Slang"]
 	path = engine/Slang
 	url = git@github.com:rytc/slang-jai.git
-[submodule "engine/jai-vulkan"]
-	path = engine/jai-vulkan
-	url = https://gitlab.com/Stowy/jai-vulkan.git
 [submodule "engine/jai-vma"]
 	path = engine/jai-vma
 	url = https://gitlab.com/Stowy/jai-vma.git
@@ -25,3 +22,6 @@
 [submodule "engine/vulkan-jai-bingins"]
 	path = engine/vulkan-jai-bingins
 	url = https://github.com/drshapeless/vulkan-jai-binding.git
+[submodule "engine/Jay_Render"]
+	path = engine/Jay_Render
+	url = https://github.com/BlueJayEngine/Jay_Render.git
