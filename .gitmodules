@@ -25,6 +25,3 @@
 [submodule "engine/vulkan-jai-bindings"]
 	path = engine/vulkan-jai-bindings
 	url = https://github.com/vkaronen/vulkan-jai-bindings
-[submodule "engine/jai-sdl3"]
-	path = engine/jai-sdl3
-	url = https://github.com/overlord-systems/jai-sdl3.git
