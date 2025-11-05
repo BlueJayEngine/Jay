@@ -17,7 +17,7 @@
 	path = engine/jai-vma
 	url = https://gitlab.com/Stowy/jai-vma.git
 [submodule "engine/sdl3"]
-	path = engine/sdl3
+	path = engine/jai-sdl3
 	url = git@github.com:myriadbytes/sdl3_jai.git
 [submodule "engine/vulkan-jai-bingins"]
 	path = engine/vulkan-jai-bingins
