@@ -2,3 +2,5 @@
 bin
 *.code-workspace
 .fake
+default_modules
+how_to
