@@ -1,48 +1,183 @@
 #import "Basic"()(MEMORY_DEBUGGER = true);
-#import "Jay_Core";
-#import "Jay_Render";
+#import "Jay_ECS";
 #import "Jay_Logger";
 
-Test :: struct {
-    foo: string;
-    bar: Test_Child; 
-    fizz: float;
-    buzz: int;
+Component1 :: struct {
+    val1: s32;
+    val2: string;
+}
 
-    test_func :: () {
-        return;
+Component2 :: struct {
+    vala1: s64;
+    vala2: Apollo_Time;
+}
+
+Component3 :: struct {
+    valb1: s32;
+    valb2: float64 = 3.14;
+}
+
+Component4 :: struct {
+    valc1: String_Builder;
+    valc2: Entity;
+}
+
+Test_Stages: enum_flags u64 {
+    Q_ITER;
+    Q_EACH;
+    Q_RANDOM;
+    DEFAULT;
+    BACH;
+    MAX;
+}
+
+SOME_COUNT :: 999999;
+
+main :: () {
+
+    context.logger = jay_logger;
+
+    world: World(systems = .[
+            System(test_iter, xx Test_Stages.Q_ITER),
+            System(test_each, xx Test_Stages.Q_EACH),
+            System(test_random, xx Test_Stages.Q_RANDOM),
+            System(test_default, xx Test_Stages.DEFAULT),
+            System(test_bach, xx Test_Stages.BACH),
+            System(additional, xx Test_Stages.MAX) 
+    ]);
+
+    for 0..SOME_COUNT {
+        components: [..]Any;
+        defer array_free(components);
+
+        array_add(*components, Component1.{ xx it, "HELLO" });
+        array_add(*components, Component2.{ xx SOME_COUNT - it, current_time_consensus() });
+        array_add(*components, Component3.{});
+        array_add(*components, Component4.{ .{}, xx it });
+
+        n := it % 10;
+
+        if n > 2 {
+            if n <= 6 {
+                array_add(*components, Destruction1);
+            }
+
+            if n >= 4 {
+                array_add(*components, Destruction2);
+            }
+        }
+
+        new_entity(world, components);
+    }
+    // dump(world);
+
+    // log("=== === === === === === === === === === === === ");
+    for 0..10 {
+        
+        {
+            start := current_time_consensus();
+            progress(*world, 0.1, Test_Stages.DEFAULT);
+            log("DEFAULT: % ms", to_milliseconds(current_time_consensus() - start));
+        }
+
+        {
+            start := current_time_consensus();
+            progress(*world, 0.1, Test_Stages.Q_EACH);
+            log("EACH:    % ms", to_milliseconds(current_time_consensus() - start));
+        }
+
+        {
+            start := current_time_consensus();
+            progress(*world, 0.1, Test_Stages.Q_ITER);
+            log("ITER:    % ms", to_milliseconds(current_time_consensus() - start));
+        }
+
+        {
+            start := current_time_consensus();
+            progress(*world, 0.1, Test_Stages.Q_RANDOM);
+            log("RANDOM:  % ms", to_milliseconds(current_time_consensus() - start));
+        }
+
+
+        {
+            start := current_time_consensus();
+            progress(*world, 0.1, Test_Stages.BACH);
+            log("BACH:  % ms", to_milliseconds(current_time_consensus() - start));
+        }
+        log("------------------------");
+    }
+
+    free(world);
+    report_memory_leaks(.{});
+}
+
+test_default :: inline (c1: *Component1, c2: *Component2, c3: *Component3, c4: *Component4) {
+    c1.val1 += 1;
+    c2.vala1 += 1;
+    c3.valb1 += 1;
+    c4.valc2 += 1;
+}
+
+test_each :: (query: Query(Component1, Component2, Component3, Component4)) {
+    for query {
+        c1, c2, c3, c4 := components();       
+        c1.val1 += 1;
+        c2.vala1 += 1;
+        c3.valb1 += 1;
+        c4.valc2 += 1;
     }
 }
 
-Test_Child :: struct {
-    big: float64;
-    smol: s8;
+test_iter :: inline (query: Query(Component1, Component2, Component3, Component4)) {
+    iter1 := get_iter(query, Component1);
+    iter2 := get_iter(query, Component2);
+    iter3 := get_iter(query, Component3);
+    iter4 := get_iter(query, Component4);
+
+    for *c1, index: iter1 {
+        c1.val1 += 1;
+    }
+
+    for *c2, index: iter2 {
+        c2.vala1 += 1;
+    }
+
+    for *c3, index: iter3 {
+        c3.valb1 += 1;
+    }
+
+    for *c4, index: iter4 {
+        c4.valc2 += 1;
+    }
 }
 
-main :: () {
-    test_example: Test;
+
+test_random :: inline (query: Query(Component1, Component2, Component3, Component4)) {
+    for query {
+        c1 := get(it, Component1);
+        c2 := get(it, Component2);
+        c3 := get(it, Component3);
+        c4 := get(it, Component4);
+
+        c1.val1 += 1;
+        c2.vala1 += 1;
+        c3.valb1 += 1;
+        c4.valc2 += 1;
+    } 
+}
 
 
-    test_example = .{
-        foo = "",
-        bar = .{
-            
-        },
-    };
+test_bach :: inline (c1: []Component1, c2: []Component2, c3: []Component3, c4: []Component4) {
+    for 0..3 {
+        c1[it].val1 += 1;
+        c2[it].vala1 += 1;
+        c3[it].valb1 += 1;
+        c4[it].valc2 += 1;
+    }
+} @bach_size:4
 
-    test_example.bar = .{
-                
-    };
-    
-    context.logger = jay_logger; 
+Destruction1 :: struct {v: s32;}
+Destruction2 :: struct {v: s64;}
 
-    engine: Engine(
-        Packages(
-            Jay_Render
-        )
-    );
-
-    run(*engine);
-
-    report_memory_leaks();
+additional :: (d1: Destruction1, d2: Destruction2) {
 }

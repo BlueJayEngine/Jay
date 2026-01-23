@@ -15,6 +15,15 @@ struct VertexOutput {
     float4 sv_position : SV_Position;
 };
 
+struct Globals
+{
+    Texture2D diffuseMap;
+    TextureCube envMap;
+    SamplerState sampler;
+};
+
+uniform Globals globals;
+
 [shader("vertex")]
 VertexOutput vertMain(uint vid : SV_VertexID) {
     VertexOutput output;
