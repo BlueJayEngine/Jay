@@ -28,3 +28,6 @@
 [submodule "engine/jai-sdl3"]
 	path = engine/jai-sdl3
 	url = https://github.com/NickTsaizer/jai-sdl3.git
+[submodule "engine/Jay_Utils"]
+	path = engine/Jay_Utils
+	url = https://github.com/BlueJayEngine/Jay_Utils.git
