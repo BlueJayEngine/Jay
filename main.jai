@@ -79,32 +79,32 @@ main :: () {
         {
             start := current_time_consensus();
             progress(*world, 0.1, Test_Stages.DEFAULT);
-            log("DEFAULT: % ms", to_microseconds(current_time_consensus() - start));
+            log("DEFAULT: % μs", to_microseconds(current_time_consensus() - start));
         }
 
         {
             start := current_time_consensus();
             progress(*world, 0.1, Test_Stages.Q_EACH);
-            log("EACH:    % ms", to_microseconds(current_time_consensus() - start));
+            log("EACH:    % μs", to_microseconds(current_time_consensus() - start));
         }
 
         {
             start := current_time_consensus();
             progress(*world, 0.1, Test_Stages.Q_ITER);
-            log("ITER:    % ms", to_microseconds(current_time_consensus() - start));
+            log("ITER:    % μs", to_microseconds(current_time_consensus() - start));
         }
 
         {
             start := current_time_consensus();
             progress(*world, 0.1, Test_Stages.Q_RANDOM);
-            log("RANDOM:  % ms", to_microseconds(current_time_consensus() - start));
+            log("RANDOM:  % μs", to_microseconds(current_time_consensus() - start));
         }
 
 
         {
             start := current_time_consensus();
             progress(*world, 0.1, Test_Stages.BACH);
-            log("BACH:  % ms", to_microseconds(current_time_consensus() - start));
+            log("BACH:  % μs", to_microseconds(current_time_consensus() - start));
         }
         log("------------------------");
     }
