@@ -53,7 +53,9 @@ main :: () {
         array_add(*components, Component1.{ xx it, "HELLO" });
         array_add(*components, Component2.{ xx SOME_COUNT - it, current_time_consensus() });
         array_add(*components, Component3.{});
-        array_add(*components, Component4.{ .{}, xx it });
+        array_add(*components, Component4.{ .{}, .{index = xx it} });
+
+        // log("new_entity: %", components);
 
         n := it % 10;
 
@@ -72,59 +74,61 @@ main :: () {
     // dump(world);
 
     // log("=== === === === === === === === === === === === ");
-    for 0..10 {
+    for 0..0 {
         
         {
             start := current_time_consensus();
             progress(*world, 0.1, Test_Stages.DEFAULT);
-            log("DEFAULT: % ms", to_milliseconds(current_time_consensus() - start));
+            log("DEFAULT: % ms", to_microseconds(current_time_consensus() - start));
         }
 
         {
             start := current_time_consensus();
             progress(*world, 0.1, Test_Stages.Q_EACH);
-            log("EACH:    % ms", to_milliseconds(current_time_consensus() - start));
+            log("EACH:    % ms", to_microseconds(current_time_consensus() - start));
         }
 
         {
             start := current_time_consensus();
             progress(*world, 0.1, Test_Stages.Q_ITER);
-            log("ITER:    % ms", to_milliseconds(current_time_consensus() - start));
+            log("ITER:    % ms", to_microseconds(current_time_consensus() - start));
         }
 
         {
             start := current_time_consensus();
             progress(*world, 0.1, Test_Stages.Q_RANDOM);
-            log("RANDOM:  % ms", to_milliseconds(current_time_consensus() - start));
+            log("RANDOM:  % ms", to_microseconds(current_time_consensus() - start));
         }
 
 
         {
             start := current_time_consensus();
             progress(*world, 0.1, Test_Stages.BACH);
-            log("BACH:  % ms", to_milliseconds(current_time_consensus() - start));
+            log("BACH:  % ms", to_microseconds(current_time_consensus() - start));
         }
         log("------------------------");
     }
 
+    // dump(world);
     free(world);
     report_memory_leaks(.{});
 }
 
-test_default :: inline (c1: *Component1, c2: *Component2, c3: *Component3, c4: *Component4) {
+test_default :: inline (entity: Entity, c1: *Component1, c2: *Component2, c3: *Component3, c4: *Component4) {
     c1.val1 += 1;
     c2.vala1 += 1;
     c3.valb1 += 1;
-    c4.valc2 += 1;
-}
+    c4.valc2.index += 1;
 
-test_each :: (query: Query(Component1, Component2, Component3, Component4)) {
+} @without:Destruction1
+
+test_each :: inline (query: Query(Component1, Component2, Component3, Component4)) {
     for query {
         c1, c2, c3, c4 := components();       
         c1.val1 += 1;
         c2.vala1 += 1;
         c3.valb1 += 1;
-        c4.valc2 += 1;
+        c4.valc2.index += 1;
     }
 }
 
@@ -147,7 +151,7 @@ test_iter :: inline (query: Query(Component1, Component2, Component3, Component4
     }
 
     for *c4, index: iter4 {
-        c4.valc2 += 1;
+        c4.valc2.index += 1;
     }
 }
 
@@ -162,19 +166,23 @@ test_random :: inline (query: Query(Component1, Component2, Component3, Componen
         c1.val1 += 1;
         c2.vala1 += 1;
         c3.valb1 += 1;
-        c4.valc2 += 1;
+        c4.valc2.index += 1;
     } 
 }
 
 
-test_bach :: inline (c1: []Component1, c2: []Component2, c3: []Component3, c4: []Component4) {
+test_bach :: inline (e: []Entity, c1: []Component1, c2: []Component2, c3: []Component3, c4: []Component4) {
+    // for e {
+        // log("Entity % bach touched", it);
+    // } 
     for 0..3 {
+        // print("% ", it);
         c1[it].val1 += 1;
         c2[it].vala1 += 1;
         c3[it].valb1 += 1;
-        c4[it].valc2 += 1;
+        c4[it].valc2.index += 1;
     }
-} @bach_size:4
+}
 
 Destruction1 :: struct {v: s32;}
 Destruction2 :: struct {v: s64;}
