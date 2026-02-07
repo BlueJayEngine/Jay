@@ -41,7 +41,7 @@
             set_optimization(*build_options, Optimization_Type.VERY_OPTIMIZED, true);
         } else if arg == "release" {
             build_options.backend = .LLVM;
-            set_optimization(*build_options, Optimization_Type.VERY_OPTIMIZED, false);
+            set_optimization(*build_options, Optimization_Type.OPTIMIZED_VERY_SMALL, false);
         }
         else {
             print("Unknown argument: %\n", arg);
