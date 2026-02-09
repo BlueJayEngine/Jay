@@ -16,18 +16,15 @@
 [submodule "engine/jai-vma"]
 	path = engine/jai-vma
 	url = https://gitlab.com/Stowy/jai-vma.git
-[submodule "engine/vulkan-jai-bingins"]
-	path = engine/vulkan-jai-bingins
-	url = https://github.com/drshapeless/vulkan-jai-binding.git
 [submodule "engine/Jay_Render"]
 	path = engine/Jay_Render
 	url = https://github.com/BlueJayEngine/Jay_Render.git
-[submodule "engine/vulkan-jai-bindings"]
-	path = engine/vulkan-jai-bindings
-	url = https://github.com/vkaronen/vulkan-jai-bindings
 [submodule "engine/jai-sdl3"]
 	path = engine/jai-sdl3
 	url = https://github.com/NickTsaizer/jai-sdl3.git
 [submodule "engine/Jay_Utils"]
 	path = engine/Jay_Utils
 	url = https://github.com/BlueJayEngine/Jay_Utils.git
+[submodule "engine/Jay_Vulkan"]
+	path = engine/Jay_Vulkan
+	url = https://github.com/BlueJayEngine/Jay_Vulkan
