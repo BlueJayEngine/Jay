@@ -1,6 +1,8 @@
 .build
+.nvim
+.opencode
+.vscode
 bin
+tmp
 *.code-workspace
 .fake
-default_modules
-how_to

@@ -63,7 +63,7 @@ Jay/
     Slang/               # Jai bindings for Slang shader compiler
     jai-sdl3/            # Jai bindings for SDL3
     jai-vma/             # Jai bindings for Vulkan Memory Allocator
-    vulkan-jai-bindings/ # Jai bindings for Vulkan API
+    Jay_Vulkan/          # Jai bindings for Vulkan API
   assets/shaders/        # .slang shader source files
   bin/                   # Build output (executable + shared libs)
 ```

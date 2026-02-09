@@ -1,6 +1,7 @@
 #import "Basic"()(MEMORY_DEBUGGER = true);
 #import "Jay_ECS";
 #import "Jay_Logger";
+#import "Jay_Render";
 
 Component1 :: struct {
     val1: s32;

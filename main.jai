@@ -1,5 +1,11 @@
-#import "Jay_Math";
+#import "Jay_Core";
+#import "Jay_Render";
+#import "Basic"()(MEMORY_DEBUGGER=true);
 
 main :: () {
-    math_test();
+    engine: Engine(
+        Packages(Jay_Render),
+    );
+    
+    run(*engine);
 }
