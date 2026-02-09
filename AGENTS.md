@@ -14,11 +14,15 @@ the project root.
 # Standard debug build (X64 backend, bounds checking ON)
 jai build.jai
 
-# Optimized build (LLVM backend, VERY_OPTIMIZED)
-jai build.jai - opt
+# Debug build with optimizations (LLVM backend, VERY_OPTIMIZED + debug symbols)
+jai build.jai - debug
 
 # Release build (LLVM backend, OPTIMIZED_VERY_SMALL)
 jai build.jai - release
+
+# With Tracy profiler (plugin args before build args, separated by -)
+jai build.jai +tracy -modules - -release
+jai build.jai +tracy -modules - -release_debug
 ```
 
 The build metaprogram (`build.jai`) compiles `main.jai` as the entry point.
@@ -37,7 +41,7 @@ There is no unified test runner. Tests are standalone Jai programs or compile-ti
 jai build.jai
 
 # Build with optimizations:
-jai build.jai - release
+jai build.jai -release
 ```
 
 Tests verify correctness via `assert` (fatal on failure) and `log_error` messages.

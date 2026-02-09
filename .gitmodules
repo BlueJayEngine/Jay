@@ -28,3 +28,6 @@
 [submodule "engine/Jay_Vulkan"]
 	path = engine/Jay_Vulkan
 	url = https://github.com/BlueJayEngine/Jay_Vulkan
+[submodule "modules/tracy"]
+	path = modules/tracy
+	url = https://github.com/BlueJayEngine/tracy.git
