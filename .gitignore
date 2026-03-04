@@ -1,9 +1,7 @@
 **/.build
-.nvim
-.opencode
-.vscode
+/.*/
 bin
 tmp
 *.code-workspace
-.fake
 engine/AI_Render/
+plan.md
