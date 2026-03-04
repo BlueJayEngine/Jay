@@ -34,10 +34,6 @@ Test_Stages: enum_flags u64 {
 
 SOME_COUNT :: 999;
 
-bubble_sort :: (array: []s64) {
-    
-}
-
 
 main :: () {
 

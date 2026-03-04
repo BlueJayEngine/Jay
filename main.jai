@@ -1,13 +1,15 @@
-#import "Jay_Core";
+#import "Basic"()(MEMORY_DEBUGGER = true);
 #import "Jay_Render";
-#import "Basic"()(MEMORY_DEBUGGER=true);
+#import "Jay_Core";
+
 
 main :: () {
-    context.logger = cli_logger;
 
-    engine: Engine(
-        Packages(Jay_Render, Jay_Logger_CLI),
-    );
+    engine: Engine(Packages(Jay_Render));
     
     run(*engine);
+    report_memory_leaks();
 }
+
+
+

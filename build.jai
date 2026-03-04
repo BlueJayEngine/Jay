@@ -56,7 +56,8 @@
         else if arg == "debug" || arg == "-release_debug" {
             // LLVM backend with maximum optimization but keeping debug symbols
             build_options.backend = .LLVM;
-            set_optimization(*build_options, Optimization_Type.VERY_OPTIMIZED, true);
+            build_options.llvm_options.disable_inlining = true;
+            set_optimization(*build_options, Optimization_Type.OPTIMIZED_VERY_SMALL, true);
         }
         else if arg == "-" {
             // Separator between plugin args and build args - skip

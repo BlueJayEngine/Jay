@@ -1,40 +1,34 @@
-static float2 positions[3] = float2[](
-    float2(0.0, -0.5),
-    float2(0.5, 0.5),
-    float2(-0.5, 0.5)
-);
-
-static float3 colors[3] = float3[](
-    float3(1.0, 0.0, 0.0),
-    float3(0.0, 1.0, 0.0),
-    float3(0.0, 0.0, 1.0)
-);
+struct VertexInput {
+    float3 position : POSITION;
+    float3 color    : COLOR;
+};
 
 struct VertexOutput {
     float3 color;
     float4 sv_position : SV_Position;
 };
 
-struct Globals
-{
-    Texture2D diffuseMap;
-    TextureCube envMap;
-    SamplerState sampler;
+struct Globals {
+    row_major float4x4 view;
+    row_major float4x4 proj;
+    float time;
+    int2 resoution;
 };
 
-uniform Globals globals;
+[[vk::push_constant]] ConstantBuffer<PushConstants> push;
 
 [shader("vertex")]
-VertexOutput vertMain(uint vid : SV_VertexID) {
+VertexOutput vert_main(VertexInput input) {
     VertexOutput output;
-    output.sv_position = float4(positions[vid], 0.0, 1.0);
-    output.color = colors[vid];
+    output.sv_position = mul(push.mvp, float4(input.position, 1.0));
+    output.color = input.color;
     return output;
 }
 
 
+
 [shader("fragment")]
-float4 fragMain(VertexOutput inVert) : SV_Target
+float4 frag_main(VertexOutput inVert) : SV_Target
 {
     float3 color = inVert.color;
     return float4(color, 1.0);
